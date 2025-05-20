@@ -1,8 +1,8 @@
 
-GET http://localhost:5035/hello
+GET http://localhost:5035/api/categories
 
 ###
-POST http://localhost:5035/hello
+POST http://localhost:5035/api/categories
 ###
 PUT http://localhost:5035/hello
 ###

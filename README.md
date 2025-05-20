@@ -22,3 +22,15 @@ Understand what Web APIs are and how ASP.NET Core allows you to build them.
  - [] URL Naming Best practices;
  - [] Learn how routing works in ASP.NET Core (`[Route]` and [HttpGet], `[HttpPost]` etc.).
 
+### **3. Model Binding. Validation and MVC Architecture**
+
+Understand how data is passed to and from API endpoints with Controller and how to validate the incoming data.
+
+- [] Model binding: Passing data to methods via route, query string, and request body.
+- [] Route Constraint
+- [] Input validation and custon validation.
+- [] Model, DTOs
+- [] Model validation using data annotations (e.g., `[Required]`, `[Range]`).
+- [] Controllers and actions in ASP.NET Core.
+- [] Routing: Attribute routing, conventional routing.
+- [] URL Naming Best practices.

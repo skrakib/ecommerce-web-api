@@ -15,33 +15,53 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+List<Category> categories = new List<Category>();
 //Configure the HTTP request pipeline.
 app.MapGet("/", () =>
 {
     return "Hello World!";
 });
-app.MapGet("/hello", () =>
+app.MapGet("api/categories", () =>
 {
-    // This is a simple GET method
-    var response = new
+    return Results.Ok(categories);
+});
+app.MapPost("api/categories", () =>
+{
+   // return ("categories");
+    var newCategory = new Category
     {
-        Message = "I am a GET method",
-        Date = DateTime.Now
+        CategoryId = Guid.NewGuid(),
+        Name = "New Category",
+        Description = "This is a new category.",
+        CreatedAt = DateTime.UtcNow
     };
-   return Results.Ok(response);
+    categories.Add(newCategory);
+    return Results.Created($"/api/categories/{newCategory.CategoryId}", newCategory);
 });
-app.MapPost("/hello", () =>
+app.MapPut("api/categories", () =>
 {
-    return Results.Created("/hello", "I am a POST method");
+
 });
-app.MapPut("/hello", () =>
+app.MapDelete("api/categories", () =>
 {
+    //return ("categories");
+    var categoryId = Guid.NewGuid();
+    var category = categories.FirstOrDefault(c => c.CategoryId == categoryId);
+    if (category == null)
+    {
+        return Results.NotFound();
+    }
+    categories.Remove(category);
     return Results.NoContent();
 });
-app.MapDelete("/hello", () =>
-{
-    return Results.NoContent();
-});
+
 
 app.Run();
 
+public record Category
+{
+    public Guid CategoryId { get; set; }
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
